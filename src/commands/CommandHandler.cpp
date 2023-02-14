@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 10:05:08 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/14 19:41:45 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/14 22:25:09 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ CommandHandler::CommandHandler(Server *server) : _server(server) {
 	_commands["USER"] = new UserCommand(_server, false);
 
 	_commands["JOIN"] = new JoinCommand(_server);
+	_commands["PART"] = new PartCommand(_server);
 }
 
 CommandHandler::~CommandHandler(void) {

@@ -6,7 +6,7 @@
 #    By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 18:53:12 by sayar             #+#    #+#              #
-#    Updated: 2023/02/14 19:44:51 by sayar            ###   ########.fr        #
+#    Updated: 2023/02/14 22:31:13 by sayar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ircserv
 
 CC = c++
 
-FLAGS = -Wall -Werror -Wextra -std=c++98 -g -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
 INC = 	includes/commands/CommandHandler.hpp\
 		includes/commands/Command.hpp\

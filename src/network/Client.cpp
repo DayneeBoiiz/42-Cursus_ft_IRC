@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:26:29 by schahid           #+#    #+#             */
-/*   Updated: 2023/02/14 17:58:00 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/14 22:40:01 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,16 @@ void Client::join(Channel *channel)
 
 void Client::leave(void)
 {
-    this->channel->removeClient(this);
-    ft_print_log(this->nick_name + "has left channel " + channel->getName());
+    if (!channel) return;
+
+	const std::string name = channel->getName();
+
+	channel->broadcast(RPL_PART(getPrefix(), channel->getName()));
+	channel->removeClient(this);
+
+	char message[100];
+	sprintf(message, "%s has left channel %s.", nick_name.c_str(), name.c_str());
+	ft_print_log(message);
 }
 
 std::string Client::getPrefix(void) const
