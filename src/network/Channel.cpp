@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:16:35 by sayar             #+#    #+#             */
-/*   Updated: 2023/01/18 19:53:02 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/14 19:56:24 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void	Channel::broadcast(std::string const &message, Client *out) {
 }
 
 void	Channel::removeClient(Client *client) {
-	_clients.erase(std::remove(_clients.begin(), _clients.end(), client), _clients.end());
-	client->setChannel(NULL);
+
+	if (_clients.size()) {
+		_clients.erase(std::remove(_clients.begin(), _clients.end(), client), _clients.end());
+	}
+	client->setChannel(nullptr);
 
 	if (_clients.empty()) {
 		// HELLO WORLD

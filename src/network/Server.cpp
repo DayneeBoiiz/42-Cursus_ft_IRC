@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:16:55 by sayar             #+#    #+#             */
-/*   Updated: 2023/01/20 22:55:19 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/14 17:43:23 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,39 +61,19 @@ void	Server::DisconnectClient(int fd) {
 void	Server::ConnectClient(void) {
 
 	int fd;
-	/*
-	** Sockaddr_in used to represent an Internet socket address
-	** Sin_family specifies the address family (AKA IPv4/IPv6)
-	** Sin_port specifies the port number in network byte order
-	*/
 	sockaddr_in s_addr = {};
 	socklen_t	s_len = sizeof(s_addr);
 
-	/*
-	** Accept() is a function used to accept a connection request on a socket
-	** s_addr will be filled with the address of the connecting socket
-	** socklen_t is the variable that specifies the size of the "sockaddr" structure
-	*/
 	fd = accept(_sock, (struct sockaddr *)&s_addr, &s_len);
 	if (fd < 0) {
 		throw std::runtime_error("Error while accepting client connection...");
 	}
 
-	/*
-	** Pollfd is a structure used to describe a file descriptor that being
-	** monitored by poll()
-	** POLLIN is the event that poll should monitor for
-	*/
-	pollfd	pollfd = {_sock, POLLIN, 0};
+	pollfd	pollfd = {fd, POLLIN, 0};
 	_pollfds.push_back(pollfd);
 
-
-	/*
-	** Getnameinfo() is a function that is used to convert a socket
-	** address to a hostname and service name
-	*/
 	char hostname[NI_MAXHOST];
-	if (getnameinfo((struct sockaddr *)&s_addr, s_len, hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) < 0) {
+	if (getnameinfo((struct sockaddr *)&s_addr, sizeof(s_addr), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) < 0) {
 		throw std::runtime_error("Error while getting hostname on new client...");
 	}
 
@@ -110,15 +90,16 @@ void	Server::start(void) {
 
 	pollfd	server_fd = {_sock, POLLIN, 0};
 	_pollfds.push_back(server_fd);
+	int pid;
 
 	ft_print_log("Server is listening...");
 
 	while (_running) {
 
-		// Loop waiting for incoming connects or for incoming data on any of the connected sockets
-		if (poll(_pollfds.begin().base(), _pollfds.size(), -1) < 0) {
-			throw std::runtime_error("Error while Polling from fd...");
-		}
+		// if (poll(_pollfds.begin().base(), _pollfds.size(), -1) < 0) {
+		// 	throw std::runtime_error("Error while Polling from fd...");
+		// }
+		pid = poll(_pollfds.begin().base(), _pollfds.size(), -1);
 
 		pollfds_iterator	it;
 		for (it = _pollfds.begin(); it != _pollfds.end(); it++) {
@@ -145,52 +126,32 @@ void	Server::start(void) {
 
 int	Server::newSocket(void) {
 
-	/*
-	** Socket() creates an end point for communication and return a file descripto
-	** AF_INET let the socket to the IPv4 Protocol
-	** SOCK_STREAM is used to specify the socket type, witch allow the socket
-	** to use TCP protocol, that means that the data is transimitted in
-	** continuous stream
-	*/
 	int	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0) {
 		throw std::runtime_error("Error while opening socket...");
 	}
 
-	// Forcefully attaching socket to port
 	int value = 1;
 	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &value, sizeof(value)) < 0) {
 		throw std::runtime_error("Error while setting socket options...");
 	}
 
-    /*
-	** setting the socket to NON_BLOCKING mode to allow it
-	** to return any data in it's read buffer without waiting
-	** for it!
-	*/
 	if (fcntl(sockfd, F_SETFL, O_NONBLOCK) < 0) {
 		throw std::runtime_error("Error while setting socket to NON_BLOCKING...");
 	}
 
 	struct sockaddr_in server_address = {};
 
-	// Clearing the structure address to avoid any segmentation fault
 	bzero((char *) &server_address, sizeof(server_address));
 
-	/*
-	** Htons() function converts the unsigned short integer
-	** hostshort from host byte order to network byte order.
-	*/
 	server_address.sin_family = AF_INET;
 	server_address.sin_addr.s_addr = INADDR_ANY;
 	server_address.sin_port = htons(std::stoi(_port));
 
-	// Binding the socket to the current IP address on the selected port
 	if (bind(sockfd, (struct sockaddr *) &server_address, sizeof(server_address)) < 0) {
 		throw std::runtime_error("Error while binding socket...");
 	}
 
-	// Letting the socket to listen to incoming requests
 	if (listen(sockfd, MAX_CONNECTIONS) < 0) {
 		throw std::runtime_error("Error while listening on socket...");
 	}

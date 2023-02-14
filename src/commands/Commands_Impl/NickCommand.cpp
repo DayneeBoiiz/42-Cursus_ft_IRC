@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:03:08 by sayar             #+#    #+#             */
-/*   Updated: 2023/01/20 22:54:55 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/14 17:18:39 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@ NickCommand::NickCommand(Server *server, bool auth) : Command(server, auth) {
 NickCommand::~NickCommand(void) {}
 
 void	NickCommand::execute(Client *client, std::vector<std::string> arguments) {
-    (void)client;
-    (void)arguments;
+
+	if (arguments.empty() || arguments[0].empty()) {
+		client->reply(ERR_NEEDMOREPARAMS(client->getNickName(), "NICK"));
+		return ;
+	}
+
+	std::string nick = arguments[0];
+	if (_server->getClient(nick)) {
+		client->reply(ERR_NICKNAMEINUSE(client->getNickName()));
+		return ;
+	}
+
+	client->setNickName(nick);
+	client->welcome();
+
 }

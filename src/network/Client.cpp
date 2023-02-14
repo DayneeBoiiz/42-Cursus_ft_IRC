@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:26:29 by schahid           #+#    #+#             */
-/*   Updated: 2023/01/31 11:46:27 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/14 17:58:00 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,7 @@ void Client::leave(void)
 
 std::string Client::getPrefix(void) const
 {
-    // std::string user = this->user_name;
-    // std::string host = this->hostname;
-
-    // if (user_name.empty())
-    //     user = this->user_name;
-    // else
-    //     user = "!" + this->user_name;
-    // if (hostname.empty())
-    //     host = this->hostname;
-    // else
-    //     host = "@" + this->hostname;
-    // return ( this->nick_name + user + host);
-
 	return (nick_name + (user_name.empty() ? "" : "!" + user_name) + (hostname.empty() ? "" : "@" + hostname));
-
 }
 
 void	Client::setChannel(Channel *_channel) {
@@ -140,4 +126,16 @@ int Client::getState(void) const
 
 void	Client::setNickName(std::string const &name) {
 	this->nick_name = name;
+}
+
+void	Client::setState(int _state) {
+	this->state = _state;
+}
+
+void	Client::setRealName(std::string const &name) {
+	this->real_name = name;
+}
+
+void	Client::setUserName(std::string const &name) {
+	this->user_name = name;
 }

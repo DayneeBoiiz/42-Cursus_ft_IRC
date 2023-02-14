@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:09:42 by schahid           #+#    #+#             */
-/*   Updated: 2023/01/20 16:15:51 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/14 17:56:45 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ class Client
         int         getState(void) const;
 
 		void		setNickName(std::string const &name);
+		void		setState(int _state);
+		void		setRealName(std::string const &name);
+		void		setUserName(std::string const &name);
 
 };
 
