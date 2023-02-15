@@ -6,12 +6,9 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 11:45:11 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/14 19:42:48 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/15 09:58:12 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef JOINCOMMAND_HPP
-# define JOINCOMMAND_HPP
 
 # include "../../../includes/commands/CommandHandler.hpp"
 
@@ -55,5 +52,3 @@ void	JoinCommand::execute(Client *client, std::vector<std::string> arguments) {
 
 	client->join(channel);
 }
-
-#endif

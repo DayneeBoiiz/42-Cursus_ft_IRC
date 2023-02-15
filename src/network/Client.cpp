@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:26:29 by schahid           #+#    #+#             */
-/*   Updated: 2023/02/14 22:40:01 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/15 14:15:25 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void Client::join(Channel *channel)
     std::string users;
     std::vector<std::string> nicknames = channel->getNicknames();
     for (std::vector<std::string>::iterator it = nicknames.begin(); it != nicknames.end(); it++)
-        users += " ";
+		users.append(*it + " ");
 
     reply(RPL_NAMREPLY(nick_name, this->channel->getName(), users));
     reply(RPL_ENDOFNAMES(nick_name, this->channel->getName()));

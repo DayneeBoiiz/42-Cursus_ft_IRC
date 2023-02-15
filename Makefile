@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+         #
+#    By: sayar <sayar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 18:53:12 by sayar             #+#    #+#              #
-#    Updated: 2023/02/14 22:31:13 by sayar            ###   ########.fr        #
+#    Updated: 2023/02/15 15:10:13 by sayar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC =	src/main.cpp\
 		src/commands/Commands_Impl/PassCommand.cpp\
 		src/commands/Commands_Impl/PingCommand.cpp\
 		src/commands/Commands_Impl/PongCommand.cpp\
-		src/commands/Commands_Impl/PrivMsgcommand.cpp\
+		src/commands/Commands_Impl/PrivMsgCommand.cpp\
 		src/commands/Commands_Impl/QuitCommand.cpp\
 		src/commands/Commands_Impl/UserCommand.cpp\
 		src/network/Channel.cpp\

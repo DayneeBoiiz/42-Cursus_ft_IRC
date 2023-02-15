@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:24:13 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/14 22:25:20 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/15 12:04:11 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,11 @@ class PongCommand : public Command {
 		void	execute(Client *client, std::vector<std::string> arguments);
 };
 
-class PrivMCommand : public Command {
+class PrivMsgCommand : public Command {
 
 	public:
-		PrivMCommand(Server *server, bool auth);
-		~PrivMCommand(void);
+		PrivMsgCommand(Server *server);
+		~PrivMsgCommand(void);
 
 		void	execute(Client *client, std::vector<std::string> arguments);
 };
@@ -139,6 +139,15 @@ class QuitCommand : public Command {
 	public:
 		QuitCommand(Server *server, bool auth);
 		~QuitCommand(void);
+
+		void	execute(Client *client, std::vector<std::string> arguments);
+};
+
+class KickCommand : public Command {
+
+	public:
+		KickCommand(Server *server);
+		~KickCommand(void);
 
 		void	execute(Client *client, std::vector<std::string> arguments);
 };
