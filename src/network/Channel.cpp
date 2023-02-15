@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:16:35 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/14 22:35:32 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/15 17:16:01 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ Channel::Channel(std::string const &name, std::string const &password, Client *a
 Channel::~Channel(void) {}
 
 void	Channel::broadcast(std::string const &message) {
+
+	// std::cout << "------>  " << message << std::endl;
 	for (client_iterator it = _clients.begin(); it != _clients.end(); it++) {
 		(*it)->write(message);
 	}
