@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 10:05:08 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/15 15:14:00 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/16 15:38:05 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ CommandHandler::CommandHandler(Server *server) : _server(server) {
 	_commands["PART"] = new PartCommand(_server);
 	_commands["KICK"] = new KickCommand(_server);
 	_commands["PRIVMSG"] = new PrivMsgCommand(_server);
+	_commands["MODE"] = new ModeCommand(_server);
 }
 
 CommandHandler::~CommandHandler(void) {

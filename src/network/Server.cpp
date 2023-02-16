@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:16:55 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/15 15:10:11 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/16 16:23:10 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,14 @@ void	Server::start(void) {
 
 	pollfd	server_fd = {_sock, POLLIN, 0};
 	_pollfds.push_back(server_fd);
-	int pid;
 
 	ft_print_log("Server is listening...");
 
 	while (_running) {
 
-		// if (poll(_pollfds.begin().base(), _pollfds.size(), -1) < 0) {
-		// 	throw std::runtime_error("Error while Polling from fd...");
-		// }
-		pid = poll(_pollfds.begin().base(), _pollfds.size(), -1);
+		if (poll(_pollfds.begin().base(), _pollfds.size(), -1) < 0) {
+			throw std::runtime_error("Error while Polling from fd...");
+		}
 
 		pollfds_iterator	it;
 		for (it = _pollfds.begin(); it != _pollfds.end(); it++) {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Command.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:24:13 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/15 12:04:11 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/16 15:23:22 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ public:
 class ModeCommand : public Command {
 
 	public:
-		ModeCommand(Server *server, bool auth);
+		ModeCommand(Server *server);
 		~ModeCommand(void);
 
 		void	execute(Client *client, std::vector<std::string> arguments);
