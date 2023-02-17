@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:24:13 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/16 15:23:22 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/17 21:43:04 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ class PartCommand : public Command {
 class PingCommand : public Command {
 
 	public:
-		PingCommand(Server *server, bool auth);
+		PingCommand(Server *server);
 		~PingCommand(void);
 
 		void	execute(Client *client, std::vector<std::string> arguments);
@@ -119,7 +119,7 @@ class PingCommand : public Command {
 class PongCommand : public Command {
 
 	public:
-		PongCommand(Server *server, bool auth);
+		PongCommand(Server *server);
 		~PongCommand(void);
 
 		void	execute(Client *client, std::vector<std::string> arguments);
@@ -148,6 +148,15 @@ class KickCommand : public Command {
 	public:
 		KickCommand(Server *server);
 		~KickCommand(void);
+
+		void	execute(Client *client, std::vector<std::string> arguments);
+};
+
+class NoticeCommand : public Command {
+
+	public:
+		NoticeCommand(Server *server);
+		~NoticeCommand(void);
 
 		void	execute(Client *client, std::vector<std::string> arguments);
 };

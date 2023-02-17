@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 10:05:08 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/16 15:38:05 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/17 21:50:33 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ CommandHandler::CommandHandler(Server *server) : _server(server) {
 	_commands["NICK"] = new NickCommand(_server, false);
 	_commands["PASS"] = new PassCommand(_server, false);
 	_commands["USER"] = new UserCommand(_server, false);
+	_commands["QUIT"] = new QuitCommand(_server, false);
 
 	_commands["JOIN"] = new JoinCommand(_server);
 	_commands["PART"] = new PartCommand(_server);
 	_commands["KICK"] = new KickCommand(_server);
 	_commands["PRIVMSG"] = new PrivMsgCommand(_server);
 	_commands["MODE"] = new ModeCommand(_server);
+	_commands["NOTICE"] = new NoticeCommand(_server);
+	_commands["PING"] = new PingCommand(_server);
+	_commands["PONG"] = new PongCommand(_server);
 }
 
 CommandHandler::~CommandHandler(void) {
