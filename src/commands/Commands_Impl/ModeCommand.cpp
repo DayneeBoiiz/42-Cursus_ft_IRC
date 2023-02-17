@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:21:49 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/17 22:21:01 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/17 23:25:51 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,14 @@ void	ModeCommand::execute(Client *client, std::vector<std::string> arguments) {
 			case ('l') : {
 				channel->setMaxClient(active ? std::stol(arguments[p]) : 0);
 				channel->broadcast(RPL_MODE(client->getPrefix(), channel->getName(), (active ? "+l" : "-l"), (active ? arguments[p] : "")));
-				// p += active ? 1 : 0;
-				// std::cout << "======>>>> " << arguments[p] << std::endl;
+				p += active ? 1 : 0;
 				break ;
+			}
+
+			case ('k') : {
+				channel->setPassword(active ? arguments[p] : "");
+				channel->broadcast(RPL_MODE(client->getPrefix(), channel->getName(), (active ? "+k" : "-k"), (active ? arguments[p] : "")));
+				p += active ? 1 : 0;
 			}
 
 			default :
