@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 23:26:16 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/17 23:33:09 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 13:03:32 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <string.h>
 # include <errno.h>
 # include <sstream>
+# include <stdexcept>
 
 class Bot {
 
@@ -46,7 +47,10 @@ public:
 	~Bot(void);
 
 
-	int	newSocket(void);
+	int		newSocket(void);
+	void	start(void);
+	void	authentication(void);
+	void	send_to_client(std::string command);
 };
 
 

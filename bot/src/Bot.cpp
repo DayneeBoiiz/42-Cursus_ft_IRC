@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:41:59 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/17 23:33:19 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 13:09:14 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,44 @@ Bot::~Bot(void) {
 
 int	Bot::newSocket(void) {
 
-	
+	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	if (sockfd < 0) {
+		throw std::runtime_error("Error while opening socket...");
+	}
+
+	struct sockaddr_in	server_address = {};
+
+	bzero((char *) &server_address, sizeof(server_address));
+
+	server_address.sin_family = AF_INET;
+	server_address.sin_port = htons(std::stoi(_port));
+	server_address.sin_addr.s_addr = inet_addr(_host.c_str());
+
+	if (connect(sockfd, (struct sockaddr *) &server_address, sizeof(server_address)) < 0) {
+		throw std::runtime_error("Couldn't connect to host...");
+	}
+
+	return (sockfd);
+}
+
+void	Bot::send_to_client(std::string command) {
+
+	std::string standard = command + "\r\n";
+	if (send(_sock, standard.c_str(), standard.size(), 0) < 0) {
+		throw std::runtime_error("Couldn't send command to client...");
+	}
+}
+
+void	Bot::authentication(void) {
+
+	send_to_client("PASS " + _password);
+	send_to_client("NICK irc_bot");
+	send_to_client("USER irc_bot 0 * :42 ft_irc's bot");
+
+}
+
+void	Bot::start(void) {
+
+	authentication();
 
 }
