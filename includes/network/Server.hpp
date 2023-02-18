@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:54 by sayar             #+#    #+#             */
-/*   Updated: 2023/01/20 14:43:46 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 12:03:11 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ public:
 	void	DisconnectClient(int fd);
 	void	ConnectClient(void);
 	void	MessageClient(int fd);
+	void	RemoveChannel(Channel *channel);
 
 	Channel	*getChannel(std::string const &name);
 	Channel	*createChannel(std::string const &name, std::string const &password, Client *client);

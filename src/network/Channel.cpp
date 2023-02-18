@@ -6,14 +6,14 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:16:35 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/15 17:16:01 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 12:18:24 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/network/Channel.hpp"
 
-Channel::Channel(std::string const &name, std::string const &password, Client *admin) :
-	_name(name), _admin(admin), _k(password), _l(0), _n(false) {
+Channel::Channel(Server *server, std::string const &name, std::string const &password, Client *admin) :
+	_server(server), _name(name), _admin(admin), _k(password), _l(0), _n(false) {
 
 }
 
@@ -43,7 +43,7 @@ void	Channel::removeClient(Client *client) {
 	client->setChannel(nullptr);
 
 	if (_clients.empty()) {
-		// HELLO WORLD
+		_server->RemoveChannel(this);
 		return ;
 	}
 

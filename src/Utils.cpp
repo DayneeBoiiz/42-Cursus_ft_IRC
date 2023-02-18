@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:49:22 by sayar             #+#    #+#             */
-/*   Updated: 2023/01/19 19:49:40 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 12:22:21 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	ft_print_log(const std::string &log) {
     strftime(buff, sizeof(buff), "%d-%m-%Y %H-%M-%S", time_info);
     std::string str(buff);
 
-    std::cout << "[" << str << "]" << log << std::endl;
+    std::cout << "[" << str << "]" << " " << log << std::endl;
 }

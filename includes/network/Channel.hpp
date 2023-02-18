@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:07:35 by sayar             #+#    #+#             */
-/*   Updated: 2023/01/19 19:44:48 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 12:05:16 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CHANELL_HPP
 
 class Client;
+class Server;
 
 # include "Server.hpp"
 # include "Channel.hpp"
@@ -25,6 +26,7 @@ class Channel {
 	typedef std::vector<Client*>::iterator	client_iterator;
 
 private:
+	Server					*_server;
 	std::string				_name;
 	Client					*_admin;
 	std::vector<Client*>	_clients;
@@ -35,7 +37,7 @@ private:
 	bool					_n; /** toggle the no messages to channel from clients on the outside **/
 
 public:
-	Channel(std::string const &name, std::string const &password, Client *admin);
+	Channel(Server *server, std::string const &name, std::string const &password, Client *admin);
 	~Channel(void);
 
 	Client*						getAdmin(void) const;
