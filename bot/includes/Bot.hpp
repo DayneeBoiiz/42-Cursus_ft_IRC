@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 23:26:16 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/18 13:03:32 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 16:58:38 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # include <errno.h>
 # include <sstream>
 # include <stdexcept>
+# include "Utils.hpp"
+# include <thread>
 
 class Bot {
 
@@ -51,7 +53,23 @@ public:
 	void	start(void);
 	void	authentication(void);
 	void	send_to_client(std::string command);
+
+	static void	ServerListener(Bot *bot);
+	void	MessageRecieved(std::string const &message);
 };
+
+/* -------------------------------------------------------------------------- */
+/*                                   COLORS                                   */
+/* -------------------------------------------------------------------------- */
+# define CC_BLK "\e[0;30m"
+# define CC_RED "\e[0;31m"
+# define CC_GRN "\e[0;32m"
+# define CC_YEL "\e[0;33m"
+# define CC_BLU "\e[0;34m"
+# define CC_MAG "\e[0;35m"
+# define CC_CYN "\e[0;36m"
+# define CC_WHT "\e[0;37m"
+
 
 
 #endif

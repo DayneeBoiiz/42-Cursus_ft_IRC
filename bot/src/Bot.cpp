@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:41:59 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/18 13:09:14 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/18 17:20:39 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,33 @@ int	Bot::newSocket(void) {
 
 void	Bot::send_to_client(std::string command) {
 
+	std::cout << CC_RED << " [-] " << command << std::endl;
+
 	std::string standard = command + "\r\n";
 	if (send(_sock, standard.c_str(), standard.size(), 0) < 0) {
 		throw std::runtime_error("Couldn't send command to client...");
 	}
+}
+
+void	Bot::MessageRecieved(std::string const &message) {
+
+	std::cout << message << std::endl;
+	ft::s_vector args = ft::split(message);
+
+}
+
+void	Bot::ServerListener(Bot *bot) {
+
+	char	buffer[256];
+	int		len;
+
+	while ((len = recv(bot->_sock, buffer, 256, 0)) > 0) {
+		buffer[len] = 0;
+		bot->MessageRecieved(std::string(buffer, len));
+	}
+
+	close(bot->_sock);
+
 }
 
 void	Bot::authentication(void) {
@@ -62,5 +85,17 @@ void	Bot::authentication(void) {
 void	Bot::start(void) {
 
 	authentication();
+
+	std::thread thread(Bot::ServerListener, this);
+	thread.detach();
+
+	std::string input;
+	std::getline(std::cin, input);
+
+	while (input != "exit") {
+		std::getline(std::cin, input);
+	}
+
+	send_to_client("QUIT:Bye, bye...");
 
 }
