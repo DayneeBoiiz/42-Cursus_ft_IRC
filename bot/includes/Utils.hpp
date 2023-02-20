@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:36:30 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/20 16:34:38 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/20 18:47:54 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <vector>
 # include <stdexcept>
 # include <sstream>
+# include <memory>
 
 namespace ft {
 
@@ -42,6 +43,20 @@ namespace ft {
 			str.append(*it).append(it + 1 == vector.end() ? "" : separtor);
 		}
 		return (str);
+	}
+
+	template<typename ... Args>
+	std::string formatString(std::string const &format, Args ... args) {
+
+		int size_s = std::snprintf(NULL, 0, format.c_str(), args ...) + 1;
+		if (size_s <= 0) {
+			throw std::runtime_error("Error while formating...");
+		}
+		auto size = static_cast<size_t>(size_s);
+		std::unique_ptr<char[]> buffer(new char[size]);
+		std::snprintf(buffer.get(), size, format.c_str(), args ...);
+		return (std::string(buffer.get(), buffer.get() + size - 1));
+
 	}
 
 };

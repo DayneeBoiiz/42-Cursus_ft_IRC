@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:41:59 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/20 16:34:43 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/20 18:42:11 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,34 @@ void	Bot::send_to_client(std::string command) {
 	}
 }
 
-void	Bot::reply_numeric(std::string const &source, std::string const &reply, std::vector<std::string> &args) {
+void	Bot::sendPrivMessage(std::string const &source, std::string const &message) {
+	send_to_client("PRIVMSG " + source + " :" + message);
+}
+
+void	Bot::reply_Command(std::string const &source, std::string const &command, std::vector<std::string> args) {
+
+	std::string nickname = source;
+	std::string::size_type pos = nickname.find('!');
+	if (std::string::npos != pos) {
+		nickname = nickname.substr(1, pos - 1);
+	}
+
+	std::cout << CC_GRN << "[+] (" << nickname << ") " << command << " " << ft::join(" ", args) << std::endl;
+
+	if (command == "PRIVMSG") {
+		if (args.size() >= 2 && args.at(1).substr(1) == "ROLLDICE") {
+			sendPrivMessage(nickname, ft::formatString("http://roll.diceapi.com/images/poorly-drawn/d6/%d.png", (rand() % 6) + 1));
+			return ;
+		}
+	}
+
+}
+
+void	Bot::reply_numeric(std::string const &source, std::string const &reply, std::vector<std::string> args) {
 
 	(void) source;
-	std::cout << CC_GRN << "[+] (" << reply << ") " << ft::join(" ", args) << std::endl;
+	std::cout << std::endl;
+	std::cout << CC_GRN << " [+] (" << reply << ") " << ft::join(" ", args) << std::endl;
 
 }
 
@@ -71,10 +95,7 @@ void	Bot::MessageRecieved(std::string const &message) {
 	std::string source = arguments.at(0);
 	std::string	type = arguments.at(1);
 
-	// std::cout << source << " " << std::endl;
-	// std::cout << "---> " << type << " " << std::endl;
-
-	if (std::atoi(type.c_str()) > 0) {
+	if (atoi(type.c_str()) > 0) {
 		if (arguments.size() < 3) {
 			return ;
 		}
@@ -82,6 +103,8 @@ void	Bot::MessageRecieved(std::string const &message) {
 		reply_numeric(source, type, ft::s_vector(arguments.begin() + 3, arguments.end()));
 		return ;
 	}
+
+	reply_Command(source, type, ft::s_vector(arguments.begin() + 2, arguments.end()));
 
 }
 
