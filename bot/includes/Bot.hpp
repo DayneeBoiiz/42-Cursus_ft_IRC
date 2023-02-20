@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 23:26:16 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/20 16:05:02 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/20 16:23:32 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ public:
 
 	static void	ServerListener(Bot *bot);
 	void		MessageRecieved(std::string const &message);
-	void		reply_numeric(std::string const &source, std::string const &reply, std::vector<std:;string> const &args);
+	void		reply_numeric(std::string const &source, std::string const &reply, std::vector<std::string> &args);
 };
 
 /* -------------------------------------------------------------------------- */

@@ -6,7 +6,7 @@
 #    By: sayar <sayar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 18:53:12 by sayar             #+#    #+#              #
-#    Updated: 2023/02/18 17:14:37 by sayar            ###   ########.fr        #
+#    Updated: 2023/02/20 16:15:47 by sayar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NC = \033[0m
 
 CC = c++
 
-FLAGS = -Wall -Werror -Wextra -std=c++98 -g
+FLAGS = -Wall -Werror -Wextra -g
 
 INC = 	includes/commands/CommandHandler.hpp\
 		includes/commands/Command.hpp\
