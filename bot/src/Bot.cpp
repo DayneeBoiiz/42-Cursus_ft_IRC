@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:41:59 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/18 17:20:39 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/20 16:03:02 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,25 @@ void	Bot::send_to_client(std::string command) {
 
 void	Bot::MessageRecieved(std::string const &message) {
 
-	std::cout << message << std::endl;
-	ft::s_vector args = ft::split(message);
+	ft::s_vector arguments = ft::split(message);
+
+	if (arguments.size() < 2) {
+		return ;
+	}
+
+	std::string source = arguments.at(0);
+	std::string	type = arguments.at(1);
+
+	// std::cout << source << " " << std::endl;
+	// std::cout << "---> " << type << " " << std::endl;
+
+	if (std::atoi(type.c_str()) > 0) {
+		if (arguments.size() < 3) {
+			return ;
+		}
+
+		reply_numeric();
+	}
 
 }
 
