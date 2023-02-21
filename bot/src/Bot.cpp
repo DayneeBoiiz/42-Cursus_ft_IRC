@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:41:59 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/21 14:22:25 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/21 19:14:46 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,70 @@ void	Bot::sendPrivMessage(std::string const &source, std::string const &message)
 	send_to_client("PRIVMSG " + source + " :" + message);
 }
 
+void	Bot::FileTransfer(std::string const &source, std::string const &file, std::string const &pa) {
+
+	char	buffer[256];
+	FILE	*fd = fopen(file.c_str(), "rb");
+
+	while (!feof(fd)) {
+		int size = fread(&buffer, 1, 256, fd);
+		if (size < 0)
+			break ;
+		_buff.append(buffer, size);
+	}
+
+	fclose(fd);
+
+	std::thread file_sender([this] {
+
+		int fd_server = socket(AF_INET, SOCK_STREAM, 0);
+		if (fd_server < 0) {
+			throw std::runtime_error("Error while opening socket...");
+		}
+
+		int val = 1;
+		if (setsockopt(fd_server, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val))) {
+			throw std::runtime_error("Error while setting socket options");
+		}
+
+		struct sockaddr_in addr = {};
+		int addr_len = sizeof(addr);
+
+		bzero((char *)&addr, addr_len);
+
+		addr.sin_family = AF_INET;
+		addr.sin_addr.s_addr = INADDR_ANY;
+		addr.sin_port = htons(8000);
+
+		if (bind(fd_server, (struct sockaddr *)&addr, addr_len) < 0) {
+			throw std::runtime_error("Error while binding socket");
+		}
+
+		if (listen(fd_server, 1) < 0) {
+			throw std::runtime_error("Error while listening on socket...");
+		}
+
+		int fd_client = accept(fd_server, (struct sockaddr *)&addr, (socklen_t*)&addr_len);
+		if (fd_client < 0) {
+			close(fd_server);
+			_buff.clear();
+			return ;
+		}
+
+		send(fd_client, _buff.c_str(), _buff.size(), 0);
+		close(fd_client);
+		close(fd_server);
+		_buff.clear();
+
+	});
+
+	file_sender.detach();
+
+	send_to_client("PRIVMSG " + source + " :" + '\x01' + "DCC SEND " + pa + " 0 8000 " + std::to_string(_buff.size()) +
+		  '\x01');
+
+}
+
 void	Bot::reply_Command(std::string const &source, std::string const &command, std::vector<std::string> args) {
 
 	std::string nickname = source;
@@ -109,7 +173,12 @@ void	Bot::reply_Command(std::string const &source, std::string const &command, s
 			return ;
 		}
 
-		sendPrivMessage(nickname, "Available Commands: 'DRAWCARD' 'SENDFILE' 'HELP' ");
+		if (args.size() >= 2 && args.at(1).substr(1) == "DOWNLOAD") {
+			FileTransfer(nickname, "./Uniqueness.txt", "Uniqueness.txt");
+			return ;
+		}
+
+		sendPrivMessage(nickname, "Available Commands: 'DRAWCARD' 'DOWNLOAD' 'HELP' ");
 		return ;
 	}
 

@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 23:26:16 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/21 09:56:16 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/21 17:02:04 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ private:
 	std::string _host;
 	std::string _port;
 	std::string _password;
+	std::string _buff;
 
 	int 		_sock;
 
@@ -61,6 +62,7 @@ public:
 
 	void		sendPrivMessage(std::string const &source, std::string const &message);
 	void		sendPrivMessage(std::string const &source);
+	void		FileTransfer(std::string const &source, std::string const &file, std::string const &pa);
 };
 
 /* -------------------------------------------------------------------------- */
