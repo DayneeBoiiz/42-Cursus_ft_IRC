@@ -6,7 +6,7 @@
 #    By: sayar <sayar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/18 17:01:47 by sayar             #+#    #+#              #
-#    Updated: 2023/02/20 18:56:39 by sayar            ###   ########.fr        #
+#    Updated: 2023/02/21 14:02:58 by sayar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,13 +45,14 @@ $(PREFIX)%.o : %.cpp ${INC}
 	@$(CC) $(FLAGS) -c -o $@ $<
 
 clean :
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 	@rm -rf $(PREFIX)
 
 run : re
 	./$(NAME) 127.0.0.1 9000 E056DF6899
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@printf "${RED}Project Cleaned${NC}\n"
 
 re : fclean all

@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:41:59 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/21 12:18:48 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/21 14:22:25 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	Bot::send_to_client(std::string command) {
 
 	std::cout << CC_RED << " [-] " << command << std::endl;
 
+	usleep(500);
 	std::string standard = command + "\r\n";
 	if (send(_sock, standard.c_str(), standard.size(), 0) < 0) {
 		throw std::runtime_error("Couldn't send command to client...");
@@ -54,7 +55,25 @@ void	Bot::send_to_client(std::string command) {
 }
 
 void	Bot::sendPrivMessage(std::string const &source) {
-	send_to_client("PRIVMSG " + source + " :Reply(704): start InspIRCd Help System");
+
+	std::string replies[14] = { "PRIVMSG " + source + " :Reply(704): start miniIRC_server Help System",
+								"PRIVMSG " + source + " :Reply(705): start",
+								"PRIVMSG " + source + " :Reply(705): start This system provides help for commands and modes.",
+								"PRIVMSG " + source + " :Reply(705): Available server commands:",
+								"PRIVMSG " + source + " :Reply(705): /JOIN :Join a channel",
+								"PRIVMSG " + source + " :Reply(705): /KICK :Kick a user from a channel",
+								"PRIVMSG " + source + " :Reply(705): /MODE :change the mode of channel ['k','n','l']",
+								"PRIVMSG " + source + " :Reply(705): /NICK :change the nickname on the server",
+								"PRIVMSG " + source + " :Reply(705): /NOTICE :send a notice message to a user",
+								"PRIVMSG " + source + " :Reply(705): /PART :leave a channel",
+								"PRIVMSG " + source + " :Reply(705): /PASS :change the password",
+								"PRIVMSG " + source + " :Reply(705): /PRIVMSG :send a private message to a user",
+								"PRIVMSG " + source + " :Reply(705): /QUIT :quit the server",
+								"PRIVMSG " + source + " :Reply(705): /USER :register in the server"};
+
+	for (int i = 0; i < 14; i++) {
+		send_to_client(replies[i]);
+	}
 }
 
 void	Bot::sendPrivMessage(std::string const &source, std::string const &message) {
@@ -72,15 +91,6 @@ void	Bot::reply_Command(std::string const &source, std::string const &command, s
 	std::cout << CC_GRN << " [+] (" << nickname << ") " << command << " " << ft::join(" ", args) << std::endl;
 
 	if (command == "PRIVMSG") {
-		if (args.size() >= 2 && args.at(1).substr(1) == "ROLLDICE") {
-			sendPrivMessage(nickname, ft::formatString("http://roll.diceapi.com/images/poorly-drawn/d6/%d.png", (rand() % 6) + 1));
-			return ;
-		}
-
-		// if (args.size() >= 3 && args.at(1).substr(1) == "WEATHER") {
-		// 	std::string url = "https://www.google.com/search?q=weather" + args.at(2);
-
-		// }
 
 		if (args.size() >= 2 && args.at(1).substr(1) == "DRAWCARD") {
 
@@ -94,17 +104,13 @@ void	Bot::reply_Command(std::string const &source, std::string const &command, s
 			return;
 		}
 
-		
+		if (args.size() >= 2 && args.at(1).substr(1) == "HELP") {
+			sendPrivMessage(nickname);
+			return ;
+		}
 
-		// if (args.size() >= 2 && args.at(1).substr(1) == "HELP") {
-		// 	sendPrivMessage(nickname);
-		// 	return ;
-		// }
-
-		// if (args.size() >= 2 && args.at(1).substr(1) == "WEATHER") {
-		// 	sendPrivMessage(nickname, "https://wttr.in/");
-		// 	return ;
-		// }
+		sendPrivMessage(nickname, "Available Commands: 'DRAWCARD' 'SENDFILE' 'HELP' ");
+		return ;
 	}
 
 }
