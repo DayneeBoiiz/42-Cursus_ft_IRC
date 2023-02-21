@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:41:59 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/20 18:42:11 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/21 12:18:48 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	Bot::send_to_client(std::string command) {
 	}
 }
 
+void	Bot::sendPrivMessage(std::string const &source) {
+	send_to_client("PRIVMSG " + source + " :Reply(704): start InspIRCd Help System");
+}
+
 void	Bot::sendPrivMessage(std::string const &source, std::string const &message) {
 	send_to_client("PRIVMSG " + source + " :" + message);
 }
@@ -65,13 +69,42 @@ void	Bot::reply_Command(std::string const &source, std::string const &command, s
 		nickname = nickname.substr(1, pos - 1);
 	}
 
-	std::cout << CC_GRN << "[+] (" << nickname << ") " << command << " " << ft::join(" ", args) << std::endl;
+	std::cout << CC_GRN << " [+] (" << nickname << ") " << command << " " << ft::join(" ", args) << std::endl;
 
 	if (command == "PRIVMSG") {
 		if (args.size() >= 2 && args.at(1).substr(1) == "ROLLDICE") {
 			sendPrivMessage(nickname, ft::formatString("http://roll.diceapi.com/images/poorly-drawn/d6/%d.png", (rand() % 6) + 1));
 			return ;
 		}
+
+		// if (args.size() >= 3 && args.at(1).substr(1) == "WEATHER") {
+		// 	std::string url = "https://www.google.com/search?q=weather" + args.at(2);
+
+		// }
+
+		if (args.size() >= 2 && args.at(1).substr(1) == "DRAWCARD") {
+
+			std::string cards = "234567890JQKA";
+			std::string suits = "HCSD";
+
+			sendPrivMessage(nickname,
+						ft::formatString("https://deckofcardsapi.com/static/img/%c%c.png",
+										  cards[rand() % 13],
+										  suits[rand() % 4]));
+			return;
+		}
+
+		
+
+		// if (args.size() >= 2 && args.at(1).substr(1) == "HELP") {
+		// 	sendPrivMessage(nickname);
+		// 	return ;
+		// }
+
+		// if (args.size() >= 2 && args.at(1).substr(1) == "WEATHER") {
+		// 	sendPrivMessage(nickname, "https://wttr.in/");
+		// 	return ;
+		// }
 	}
 
 }

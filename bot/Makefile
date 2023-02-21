@@ -6,7 +6,7 @@
 #    By: sayar <sayar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/18 17:01:47 by sayar             #+#    #+#              #
-#    Updated: 2023/02/20 18:48:04 by sayar            ###   ########.fr        #
+#    Updated: 2023/02/20 18:56:39 by sayar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NC = \033[0m
 
 CC = c++
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -std=c++11 -g
 
 INC =	includes/Bot.hpp\
 		includes/Utils.hpp\

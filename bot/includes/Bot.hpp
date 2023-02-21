@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 23:26:16 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/20 18:44:00 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/21 09:56:16 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ public:
 	void		reply_Command(std::string const &source, std::string const &command, std::vector<std::string> args);
 
 	void		sendPrivMessage(std::string const &source, std::string const &message);
+	void		sendPrivMessage(std::string const &source);
 };
 
 /* -------------------------------------------------------------------------- */
