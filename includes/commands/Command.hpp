@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:24:13 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/17 21:43:04 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/22 16:36:35 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@ class Server;
 #include <numeric>
 #include <regex>
 #include "../network/Server.hpp"
-
-/*
-**	JOIN Command
-**	NICK Command
-**	MODE Command
-**	USER Command
-**	PASS Command
-**	PART Command
-**	PING Command
-**	PONG Command
-**	KICK Command
-**	QUIT Command
-**	NOTICE Command
-**	PRIVMSG Command
-*/
 
 class Command {
 
@@ -157,6 +142,15 @@ class NoticeCommand : public Command {
 	public:
 		NoticeCommand(Server *server);
 		~NoticeCommand(void);
+
+		void	execute(Client *client, std::vector<std::string> arguments);
+};
+
+class TopicCommand : public Command {
+
+	public:
+		TopicCommand(Server *server);
+		~TopicCommand(void);
 
 		void	execute(Client *client, std::vector<std::string> arguments);
 };
