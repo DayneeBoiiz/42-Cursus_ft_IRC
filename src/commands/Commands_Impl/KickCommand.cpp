@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:10:11 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/15 15:10:12 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/22 17:20:26 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	KickCommand::execute(Client *client, std::vector<std::string> arguments) {
 		client->reply(ERR_NEEDMOREPARAMS(client->getNickName(), "KICK"));
 		return ;
 	}
+
 
 	std::string name = arguments[0];
 	std::string user = arguments[1];

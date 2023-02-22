@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:47:16 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/15 17:16:06 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/22 21:56:49 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define RPL_MODE(source, channel, modes, args)				":" + source + " MODE " + channel + " " + modes + " " + args
 # define RPL_QUIT(source, message)							":" + source + " QUIT :Quit: " + message
 # define RPL_PING(source, token)							":" + source + " PONG :" + token
+# define RPL_NOTOPIC(source)								":" + source + " No topic on the channel"
+# define RPL_TOPIC(source, topic)							":" + source + " TOPIC :" + topic
 
 /* ERROR REPLIES */
 # define ERR_UNKNOWNCOMMAND(source, command)				"421 " + source + " " + command + " :Unknown command"

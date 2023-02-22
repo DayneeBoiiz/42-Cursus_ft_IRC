@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:16:55 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/22 16:40:46 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/22 21:51:51 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void	Server::RemoveChannel(Channel *channel) {
 
 Channel	*Server::createChannel(std::string const &name, std::string const &password, Client *client) {
 
-	Channel	*channel = new Channel(this, name, password, client, "");
+	Channel	*channel = new Channel(this, name, password, client);
 	_channels.push_back(channel);
 
 	return (channel);

@@ -6,7 +6,7 @@
 #    By: sayar <sayar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 18:53:12 by sayar             #+#    #+#              #
-#    Updated: 2023/02/21 19:16:47 by sayar            ###   ########.fr        #
+#    Updated: 2023/02/22 21:51:09 by sayar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,6 @@ run : re
 
 fclean : clean
 	@rm -rf $(NAME)
-	@printf "${RED}Project Cleaned${NC}\n"
+	@printf "${RED}Projmect Cleaned${NC}\n"
 
 re : fclean all

@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:07:35 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/22 16:41:19 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/22 21:50:26 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ private:
 	std::string				_name;
 	Client					*_admin;
 	std::vector<Client*>	_clients;
-	std::string				_topic;
 
 	/* Channel Mods*/
 	std::string				_k; /** set/remove the channel key (password) **/
@@ -38,7 +37,7 @@ private:
 	bool					_n; /** toggle the no messages to channel from clients on the outside **/
 
 public:
-	Channel(Server *server, std::string const &name, std::string const &password, Client *admin, std::string const &topic);
+	Channel(Server *server, std::string const &name, std::string const &password, Client *admin);
 	~Channel(void);
 
 	Client*						getAdmin(void) const;
