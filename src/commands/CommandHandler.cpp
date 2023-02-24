@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 10:05:08 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/24 11:06:55 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/24 11:19:33 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ CommandHandler::CommandHandler(Server *server) : _server(server) {
 	_commands["PING"] = new PingCommand(_server);
 	_commands["PONG"] = new PongCommand(_server);
 	_commands["WHOIS"] = new WhoisCommand(_server);
+	_commands["NAMES"] = new NamesCommand(_server);
 }
 
 CommandHandler::~CommandHandler(void) {

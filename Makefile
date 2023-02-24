@@ -6,7 +6,7 @@
 #    By: sayar <sayar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 18:53:12 by sayar             #+#    #+#              #
-#    Updated: 2023/02/24 11:06:25 by sayar            ###   ########.fr        #
+#    Updated: 2023/02/24 11:21:11 by sayar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC =	src/main.cpp\
 		src/commands/Commands_Impl/QuitCommand.cpp\
 		src/commands/Commands_Impl/UserCommand.cpp\
 		src/commands/Commands_Impl/WhoisCommand.cpp\
+		src/commands/Commands_Impl/NamesCommand.cpp\
 		src/network/Channel.cpp\
 		src/network/Server.cpp\
 		src/network/Client.cpp\
