@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sayar <sayar@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:09:42 by schahid           #+#    #+#             */
-/*   Updated: 2023/02/14 17:56:45 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/25 18:41:46 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ class Channel;
 
 # include <iostream>
 # include "Channel.hpp"
-# include <deque>
 # include "../Utils.hpp"
 
 # define HANDSHAKE 0

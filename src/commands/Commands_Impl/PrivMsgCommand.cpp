@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PrivMsgcommand.cpp                                 :+:      :+:    :+:   */
+/*   PrivMsgCommand.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 15:09:31 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/15 15:12:50 by sayar            ###   ########.fr       */
+/*   Created: 2023/02/15 15:09:31 by slammari          #+#    #+#             */
+/*   Updated: 2023/02/25 18:43:24 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void PrivMsgCommand::execute(Client *client, std::vector<std::string> arguments)
 
 	if (target.at(0) == '#') {
 
-		Channel *channel = client->getChannel();
+		Channel *channel = _server->getChannel(target);
 		if (!channel) {
 			client->reply(ERR_NOSUCHCHANNEL(client->getNickName(), target));
 			return;

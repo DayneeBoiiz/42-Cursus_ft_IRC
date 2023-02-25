@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 20:35:49 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/17 21:40:41 by sayar            ###   ########.fr       */
+/*   Created: 2023/02/17 20:35:49 by slammari          #+#    #+#             */
+/*   Updated: 2023/02/25 18:44:13 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void NoticeCommand::execute(Client *client, std::vector<std::string> arguments) 
 
 		Channel *channel = client->getChannel();
 		if (!channel) {
-			// client->reply(ERR_NOSUCHCHANNEL(client->getNickName(), target));
 			return;
 		}
 
@@ -61,7 +60,6 @@ void NoticeCommand::execute(Client *client, std::vector<std::string> arguments) 
 
 	Client *dest = _server->getClient(target);
 	if (!dest) {
-		// client->reply(ERR_NOSUCHNICK(client->getNickName(), target));
 		return ;
 	}
 

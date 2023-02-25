@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:16:35 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/22 21:50:59 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:19:08 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ Channel::~Channel(void) {}
 
 void	Channel::broadcast(std::string const &message) {
 
-	// std::cout << "------>  " << message << std::endl;
 	for (client_iterator it = _clients.begin(); it != _clients.end(); it++) {
-		(*it)->write(message);
+		(*it)->write(message); // Dyal soufiane
 	}
 }
 

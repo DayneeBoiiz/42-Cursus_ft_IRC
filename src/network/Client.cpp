@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:26:29 by schahid           #+#    #+#             */
-/*   Updated: 2023/02/24 11:22:43 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/25 18:40:46 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Client::~Client(void) {}
 
 void    Client::reply(std::string const &message)
 {
-    write (":" + getPrefix() + " " + message);
+    write(":" + getPrefix() + " " + message);
 }
 
 void    Client::welcome(void)
@@ -45,9 +45,7 @@ void    Client::welcome(void)
 
     reply(RPL_WELCOME(nick_name));
 
-	char log[100];
-	sprintf(log, "%s:%d is known as %s.", getHostName().c_str(), getPort(), getNickName().c_str());
-	ft_print_log(log);
+	ft_print_log(this->getHostName() + ":" + std::to_string(this->getPort()) + " is known as " + this->getNickName());
 }
 
 void Client::join(Channel *channel)
@@ -57,16 +55,14 @@ void Client::join(Channel *channel)
     std::string users;
     std::vector<std::string> nicknames = channel->getNicknames();
     for (std::vector<std::string>::iterator it = nicknames.begin(); it != nicknames.end(); it++)
-		users.append(*it + " ");
+		users = *it + " ";
 
     reply(RPL_NAMREPLY(nick_name, this->channel->getName(), users));
     reply(RPL_ENDOFNAMES(nick_name, this->channel->getName()));
 
 	channel->broadcast(RPL_JOIN(nick_name, channel->getName()));
 
-	char log[1000];
-	sprintf(log, "%s has joined the channel %s", getNickName().c_str(), channel->getName().c_str());
-    ft_print_log(log);
+	ft_print_log(this->nick_name + " has joined the channel " + channel->getName());
 }
 
 void Client::leave(void)
@@ -78,14 +74,23 @@ void Client::leave(void)
 	channel->broadcast(RPL_PART(getPrefix(), channel->getName()));
 	channel->removeClient(this);
 
-	char message[100];
-	sprintf(message, "%s has left channel %s.", nick_name.c_str(), name.c_str());
-	ft_print_log(message);
+	ft_print_log(this->nick_name + " has left the channel " + name);
 }
 
 std::string Client::getPrefix(void) const
 {
-	return (nick_name + (user_name.empty() ? "" : "!" + user_name) + (hostname.empty() ? "" : "@" + hostname));
+	std::string user = this->user_name;
+    std::string host = this->hostname;
+
+    if (user_name.empty())
+        user = this->user_name;
+    else
+        user = "!" + this->user_name;
+    if (hostname.empty())
+        host = this->hostname;
+    else
+        host = "@" + this->hostname;
+    return ( this->nick_name + user + host);
 }
 
 void	Client::setChannel(Channel *_channel) {

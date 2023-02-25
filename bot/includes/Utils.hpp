@@ -6,7 +6,7 @@
 /*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:36:30 by sayar             #+#    #+#             */
-/*   Updated: 2023/02/21 11:20:14 by sayar            ###   ########.fr       */
+/*   Updated: 2023/02/25 17:57:08 by sayar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ namespace ft {
 		return (str);
 	}
 
-	template<typename ... Args>
+	template<typename ...Args>
 	std::string formatString(std::string const &format, Args ... args) {
 
 		int size_s = std::snprintf(NULL, 0, format.c_str(), args ...) + 1;
